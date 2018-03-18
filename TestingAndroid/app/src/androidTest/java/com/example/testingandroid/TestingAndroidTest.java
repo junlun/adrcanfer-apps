@@ -38,11 +38,13 @@ public class TestingAndroidTest {
     public void setUp(){
         UiDevice mDevice;
         mDevice = UiDevice.getInstance(getInstrumentation());
+        System.out.println(mDevice.getProductName());
         mDevice.pressHome();
 
     }
 
     private static final String tag = "Testing";
+
     @Test
     public void test1() throws UiObjectNotFoundException, InterruptedException {
         UiDevice mDevice;
