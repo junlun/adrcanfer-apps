@@ -33,7 +33,7 @@ public class RandomSearch {
         double currentBestEval=eval;
         int i=1;
         while(i<iterations){
-
+            System.out.println("Running iteration "+i);
             candidate=buildRandomTestCase(graph,app);
             eval=objective.evaluate(candidate);
             if(eval>currentBestEval){

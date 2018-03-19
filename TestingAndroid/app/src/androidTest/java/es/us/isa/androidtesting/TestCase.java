@@ -63,4 +63,12 @@ public class TestCase {
             a.perform();
     }
 
+    @Override
+    public String toString(){
+        StringBuilder builder=new StringBuilder("Test Case["+testActions.size()+"]:");
+        for(Action a:testActions)
+            builder.append(a.toString());
+        return builder.toString();
+    }
+
 }

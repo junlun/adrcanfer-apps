@@ -25,4 +25,9 @@ public class CloseAppAction extends Action {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Close App "+this.appPackageName;
+    }
 }

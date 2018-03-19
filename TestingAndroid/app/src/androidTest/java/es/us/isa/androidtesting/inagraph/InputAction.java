@@ -16,4 +16,9 @@ public class InputAction extends Action {
     {
         inputGenerator.generateInput(target);
     }
+
+    @Override
+    public String toString() {
+        return "generate input";
+    }
 }

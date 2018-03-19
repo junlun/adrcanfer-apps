@@ -1,4 +1,4 @@
-package com.example.testingandroid;
+package es.us.isa.androidtesting;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

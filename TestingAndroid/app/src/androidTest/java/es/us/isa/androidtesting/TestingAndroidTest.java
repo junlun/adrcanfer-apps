@@ -1,4 +1,4 @@
-package com.example.testingandroid;
+package es.us.isa.androidtesting;
 
 import android.os.Bundle;
 import android.support.test.InstrumentationRegistry;

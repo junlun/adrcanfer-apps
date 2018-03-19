@@ -27,4 +27,9 @@ public class StartAppAction extends Action {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
     }
+
+    @Override
+    public String toString() {
+        return "Start App "+this.appPackage;
+    }
 }

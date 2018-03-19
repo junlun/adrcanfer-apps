@@ -19,7 +19,13 @@ public abstract class  Action {
 
         Action action = (Action) o;
 
-        return target.equals(action.target);
+        boolean result=false;
+        try {
+            result = target.getClassName().equals(action.target.getClassName()) && target.getText().equals(action.target.getText());
+        }catch(UiObjectNotFoundException e){
+          e.printStackTrace();
+        }
+        return result;
     }
 
     @Override
@@ -30,4 +36,6 @@ public abstract class  Action {
     public UiObject getTarget() {
         return target;
     }
+
+    public abstract String toString();
 }
