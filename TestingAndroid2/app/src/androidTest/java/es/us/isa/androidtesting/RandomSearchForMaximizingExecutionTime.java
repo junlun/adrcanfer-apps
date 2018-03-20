@@ -19,10 +19,10 @@ public class RandomSearchForMaximizingExecutionTime {
     public void test1() throws UiObjectNotFoundException, InterruptedException {
         UiDevice mDevice;
         mDevice = UiDevice.getInstance(getInstrumentation());
-        INAGraph graph = INAGraphBuilder.getInstance().build(mDevice,"TestingAndroid");
+        INAGraph graph = INAGraphBuilder.getInstance().build(mDevice,"TestingAndroid2");
         ObjectiveFunction abruptShutdown = new TestExecutionTimeObjectiveFunction();
         RandomSearch algorithm = new RandomSearch(abruptShutdown, 100, 3);
-        TestCase testCase = algorithm.run(graph, "com.example.testingandroid");
+        TestCase testCase = algorithm.run(graph, "com.example.testingandroid2");
         System.out.println("Test case found: " + testCase);
         System.out.println("Runnig it...");
         testCase.executeBefore();

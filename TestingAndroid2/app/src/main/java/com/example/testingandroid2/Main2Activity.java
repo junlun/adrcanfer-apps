@@ -9,12 +9,14 @@ public class Main2Activity extends AppCompatActivity {
     private TextView texto;
     private Integer cont;
     private long time;
+    private int buttonPressCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         texto = (TextView) findViewById(R.id.text2);
+        buttonPressCount=0;
     }
 
     public void pulBoton3(View v){
@@ -25,6 +27,7 @@ public class Main2Activity extends AppCompatActivity {
         }
         time = System.currentTimeMillis() - time;
         texto.setText(String.format("Se han ejecutado 100 000 iteraciones. Tiempo: " + time + " milisegundos"));
+        buttonPressCount++;
     }
 
     public void pulBoton4(View v){
@@ -35,9 +38,11 @@ public class Main2Activity extends AppCompatActivity {
         }
         time = System.currentTimeMillis() - time;
         texto.setText(String.format("Se han ejecutado 1 000 000 iteraciones. Tiempo: " + time + " milisegundos"));
+        buttonPressCount++;
     }
 
     public void crash(View v){
-        throw new IllegalArgumentException();
+        if(buttonPressCount==1)
+            throw new IllegalArgumentException();
     }
 }
