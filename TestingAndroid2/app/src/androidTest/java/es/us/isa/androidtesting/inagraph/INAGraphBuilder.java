@@ -22,69 +22,76 @@ public class INAGraphBuilder {
 
     private static INAGraphBuilder _instance;
 
-    private INAGraphBuilder(){}
+    private INAGraphBuilder() {
+    }
 
-    public static INAGraphBuilder getInstance(){
-        if(_instance==null)
-            _instance=new INAGraphBuilder();
+    public static INAGraphBuilder getInstance() {
+        if (_instance == null)
+            _instance = new INAGraphBuilder();
         return _instance;
     }
 
-    public INAGraph build(UiDevice device,String appName) throws UiObjectNotFoundException{
-        startApp(device,appName);
-        Node node=buildNode(device);
-        closeApp(device,appName);
+    public INAGraph build(UiDevice device, String appName) throws UiObjectNotFoundException {
+        startApp(device, appName);
+        Node node = buildNode(device);
+        closeApp(device, appName);
         return new INAGraph(node);
     }
 
     private void closeApp(UiDevice device, String appPackage) throws UiObjectNotFoundException {
-        CloseAppAction action=new CloseAppAction(appPackage);
+        CloseAppAction action = new CloseAppAction(appPackage);
         action.perform();
     }
 
     private void startApp(UiDevice device, String appPackage) throws UiObjectNotFoundException {
-        StartAppAction action=new StartAppAction(appPackage);
+        StartAppAction action = new StartAppAction(appPackage);
         action.perform();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+
+        }
     }
 
-    public Node buildNode(UiDevice device) throws UiObjectNotFoundException{
-        Node node=new Node();
-        createActions(node,device);
-        buildVertex(node,device);
+    public Node buildNode(UiDevice device) throws UiObjectNotFoundException {
+        Node node = new Node();
+        createActions(node, device);
+        buildVertex(node, device);
         return node;
     }
 
-    public void createActions(Node node, UiDevice device) throws UiObjectNotFoundException{
+    public void createActions(Node node, UiDevice device) throws UiObjectNotFoundException {
         node.getAvailableActions().addAll(createInputActions(node, device));
         node.getAvailableActions().addAll(createButtonActions(node, device));
 
     }
 
-    public List<Action> createInputActions(Node node,UiDevice device) throws UiObjectNotFoundException{
-        TextInputGenerator generator=new TextInputGenerator();
-        List<UiObject> inputTexts=findInputTexts(device);
-        List<Action> result=new ArrayList<>();
-        for(UiObject input:inputTexts){
-            result.add(new InputAction(input,generator));
+    public List<Action> createInputActions(Node node, UiDevice device) throws UiObjectNotFoundException {
+        TextInputGenerator generator = new TextInputGenerator();
+//        List<UiObject> inputTexts=findInputTexts(device);
+        List<UiObject> inputTexts = findElements(device, "android.widget.EditText");
+        List<Action> result = new ArrayList<>();
+        for (UiObject input : inputTexts) {
+            result.add(new InputAction(input, generator));
             node.getControls().add(input);
         }
         return result;
     }
 
-    private List<UiObject> findInputTexts(UiDevice device) throws UiObjectNotFoundException
-    {
-        List<UiObject> result=new ArrayList<>();
-        UiSelector selector=new UiSelector().className(EditText.class);
-        UiCollection collection=new UiCollection(selector);
-        for(int i=0;i<collection.getChildCount(selector);i++)
-            result.add(collection.getChildByInstance(selector,i));
+    private List<UiObject> findInputTexts(UiDevice device) throws UiObjectNotFoundException {
+        List<UiObject> result = new ArrayList<>();
+        UiSelector selector = new UiSelector().className(EditText.class);
+        UiCollection collection = new UiCollection(selector);
+        for (int i = 0; i < collection.getChildCount(selector); i++)
+            result.add(collection.getChildByInstance(selector, i));
         return result;
     }
 
-    public List<Action> createButtonActions(Node node,UiDevice device)  throws UiObjectNotFoundException{
-        List<UiObject> buttons=findButtons(device);
-        List<Action> result=new ArrayList<>();
-        for(UiObject input:buttons){
+    public List<Action> createButtonActions(Node node, UiDevice device) throws UiObjectNotFoundException {
+        List<Action> result = new ArrayList<>();
+//        List<UiObject> buttons=findButtons(device);
+        List<UiObject> buttons = findElements(device, "android.widget.Button");
+        for (UiObject input : buttons) {
             result.add(new ButtonAction(input));
             node.getControls().add(input);
         }
@@ -92,39 +99,65 @@ public class INAGraphBuilder {
     }
 
     public List<UiObject> findButtons(UiDevice device) throws UiObjectNotFoundException {
-        List<UiObject> result=new ArrayList<>();
+        List<UiObject> result = new ArrayList<>();
         BySelector sel = By.clazz("android.widget.Button");
         List<UiObject2> botones = device.findObjects(sel);
-        UiSelector selector=null;
-        UiObject button=null;
-        for(UiObject2 btn:botones) {
-            selector=new UiSelector().text(btn.getText());
-            button=device.findObject(selector);
+        UiSelector selector = null;
+        UiObject button = null;
+        for (UiObject2 btn : botones) {
+            selector = new UiSelector().text(btn.getText());
+            button = device.findObject(selector);
             result.add(button);
         }
         return result;
     }
 
-    public void buildVertex(Node node,UiDevice device) throws UiObjectNotFoundException {
-        for(Action a:node.getAvailableActions()){
-            try{
+    public List<UiObject> findElements(UiDevice device, String finder) {
+        List<UiObject> result = new ArrayList<>();
+        BySelector sel = resolveSelector(finder);
+        List<UiObject2> botones = device.findObjects(sel);
+        UiSelector selector = null;
+        UiObject button = null;
+        for (UiObject2 btn : botones) {
+            selector = new UiSelector().text(btn.getText());
+            button = device.findObject(selector);
+            result.add(button);
+        }
+        return result;
+    }
+
+    public BySelector resolveSelector(String finder) {
+        BySelector result = null;
+        finder = finder.substring(finder.lastIndexOf(".") + 1);
+        if (finder.equalsIgnoreCase("button")) {
+            result = By.clazz(Button.class);
+        } else if (finder.equalsIgnoreCase("EditText")) {
+            result = By.clazz(EditText.class);
+        }
+        return result;
+    }
+
+    public void buildVertex(Node node, UiDevice device) throws UiObjectNotFoundException {
+        for (Action a : node.getAvailableActions()) {
+            try {
                 a.perform();
-                if(!isSameNode(node,device)){
-                    Node nextNode=buildNode(device);
-                    node.getOutputVertex().put(a,nextNode);
-                    Action goBack=new GoBackAction(device);
-                    nextNode.getOutputVertex().put(goBack,node);
+                if (!isSameNode(node, device)) {
+                    Node nextNode = buildNode(device);
+                    node.getOutputVertex().put(a, nextNode);
+                    Action goBack = new GoBackAction(device);
+                    nextNode.getOutputVertex().put(goBack, node);
                     goBack.perform();
                 }
-            }catch(Throwable e) {
+            } catch (Throwable e) {
                 e.printStackTrace();
             }
         }
     }
 
     /**
-     * Clearly, this implementation is simplistic and can lead to inconsistent behavious when applied
+     * Clearly, this implementation is simplistic and can lead to inconsistent behaviour when applied
      * to complex user interfaces, but for a first approach it could be a starting point.
+     *
      * @param currentNode
      * @param device
      * @return Whether we are in a new UI state or not.
@@ -132,18 +165,18 @@ public class INAGraphBuilder {
      */
 
     public boolean isSameNode(Node currentNode, UiDevice device) throws UiObjectNotFoundException {
-        boolean result=true;
+        boolean result = true;
         try {
-            List<Action> inputTexts=createInputActions(currentNode,device);
-            List<Action> buttons=createButtonActions(currentNode,device);
+            List<Action> inputTexts = createInputActions(currentNode, device);
+            List<Action> buttons = createButtonActions(currentNode, device);
             for (int i = 0; i < inputTexts.size() && result; i++)
-                result=(result && currentNode.getAvailableActions().contains(inputTexts.get(i)));
+                result = (result && currentNode.getAvailableActions().contains(inputTexts.get(i)));
             for (int i = 0; i < buttons.size() && result; i++)
-                result=(result && currentNode.getAvailableActions().contains(buttons.get(i)));
+                result = (result && currentNode.getAvailableActions().contains(buttons.get(i)));
             result = (result && currentNode.getAvailableActions().size() == (inputTexts.size() + buttons.size()));
-        }catch(UiObjectNotFoundException e){
+        } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
-            result=false;
+            result = false;
         }
         return result;
     }

@@ -33,7 +33,7 @@ public class Main2Activity extends AppCompatActivity {
     public void pulBoton4(View v){
         cont = 0;
         time = System.currentTimeMillis();
-        for(int var =0; var< 1000000; var++){
+        for(int var =0; var< 1000; var++){
             cont +=var;
         }
         time = System.currentTimeMillis() - time;

@@ -10,7 +10,7 @@ public class ApplicationCrashObjectiveFunction implements ObjectiveFunction {
             test.executeBefore();
             test.executeTest();
             test.executeAfter();
-        }catch(Exception e){
+        }catch(Throwable e){
             result=1;
         }
         return result;
