@@ -5,6 +5,8 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 import java.util.List;
 import java.util.Set;
 
+import es.us.isa.androidtesting.inagraph.actions.Action;
+
 /**
  * Created by japar on 17/03/2018.
  */

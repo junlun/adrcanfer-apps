@@ -3,7 +3,7 @@ package es.us.isa.androidtesting.inagraph;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiDevice;
 
-import java.io.IOException;
+import es.us.isa.androidtesting.inagraph.actions.Action;
 
 /**
  * Created by japar on 20/03/2018.
