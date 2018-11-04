@@ -5,12 +5,11 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import es.us.isa.androidtesting.TestCase;
 import es.us.isa.androidtesting.inagraph.CloseAppAction;
 import es.us.isa.androidtesting.inagraph.INAGraph;
-import es.us.isa.androidtesting.inagraph.Action;
+import es.us.isa.androidtesting.inagraph.actions.Action;
 import es.us.isa.androidtesting.inagraph.StartAppAction;
 import es.us.isa.androidtesting.objectivefunctions.ObjectiveFunction;
 

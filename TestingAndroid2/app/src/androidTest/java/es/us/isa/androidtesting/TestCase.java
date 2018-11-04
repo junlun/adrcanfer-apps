@@ -1,11 +1,10 @@
 package es.us.isa.androidtesting;
 
-import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 
 import java.util.List;
 import java.util.Set;
-import es.us.isa.androidtesting.inagraph.Action;
+import es.us.isa.androidtesting.inagraph.actions.Action;
 
 
 

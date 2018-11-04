@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.HashSet;
 import java.util.HashMap;
 
+import es.us.isa.androidtesting.inagraph.actions.Action;
+import es.us.isa.androidtesting.inagraph.actions.InputGenerator;
+
 public class Node {
     Set<UiObject> controls;
     List<Action> availableActions;
