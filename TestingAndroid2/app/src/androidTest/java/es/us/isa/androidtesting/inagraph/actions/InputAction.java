@@ -1,6 +1,7 @@
 package es.us.isa.androidtesting.inagraph.actions;
 
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 
 

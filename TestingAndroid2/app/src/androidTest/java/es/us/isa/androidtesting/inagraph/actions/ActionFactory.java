@@ -2,6 +2,7 @@ package es.us.isa.androidtesting.inagraph.actions;
 
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObject2;
 
 import java.util.ArrayList;
 import java.util.Collection;

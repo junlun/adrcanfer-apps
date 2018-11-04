@@ -109,7 +109,8 @@
                 android:layout_marginTop="79dp"
                 android:ems="10"
                 android:inputType="text|textCapCharacters|textPersonName"
-                android:text="" />
+                android:text="Name"
+                tools:text="Name" />
 
             <CheckBox
                 android:id="@+id/checkBox1"
@@ -118,7 +119,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/text1"
                 android:layout_marginTop="168dp"
-                android:text="CheckBox" />
+                android:text="CheckBox"
+                tools:text="Checkbox" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"
@@ -133,14 +135,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="RadioButton" />
+                    android:text="RadioButton"
+                    tools:text="radio1" />
 
                 <RadioButton
                     android:id="@+id/radioButton4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="RadioButton" />
+                    android:text="RadioButton"
+                    tools:text="radio2" />
 
                 <RadioButton
                     android:id="@+id/radioButton2"
@@ -148,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="RadioButton"
-                    tools:text="Texto" />
+                    tools:text="radio3" />
             </RadioGroup>
         </RelativeLayout>
 

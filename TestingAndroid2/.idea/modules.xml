@@ -3,9 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TestingAndroid2.iml" filepath="$PROJECT_DIR$/TestingAndroid2.iml" />
-      <module fileurl="file://C:\workspace\projects\androidtesting\adrcanfer-apps\TestingAndroid2\TestingAndroid2.iml" filepath="C:\workspace\projects\androidtesting\adrcanfer-apps\TestingAndroid2\TestingAndroid2.iml" />
+      <module fileurl="file://C:/workspace/projects/androidtesting/adrcanfer-apps/TestingAndroid2/TestingAndroid2.iml" filepath="C:/workspace/projects/androidtesting/adrcanfer-apps/TestingAndroid2/TestingAndroid2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\workspace\projects\androidtesting\adrcanfer-apps\TestingAndroid2\app\app.iml" filepath="C:\workspace\projects\androidtesting\adrcanfer-apps\TestingAndroid2\app\app.iml" />
+      <module fileurl="file://C:/workspace/projects/androidtesting/adrcanfer-apps/TestingAndroid2/app/app.iml" filepath="C:/workspace/projects/androidtesting/adrcanfer-apps/TestingAndroid2/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gandro-core/gandro-core.iml" filepath="$PROJECT_DIR$/gandro-core/gandro-core.iml" />
     </modules>
   </component>
 </project>

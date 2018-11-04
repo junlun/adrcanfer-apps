@@ -22,11 +22,11 @@ public class ElementIdentifier {
     public static List<UiObject> findElements(UiDevice device, String finder) {
         List<UiObject> result = new ArrayList<>();
         BySelector sel = resolveSelector(finder);
-        List<UiObject2> botones = device.findObjects(sel);
+        List<UiObject2> elements = device.findObjects(sel);
         UiSelector selector = null;
         UiObject button = null;
-        for (UiObject2 btn : botones) {
-            selector = new UiSelector().text(btn.getText());
+        for (UiObject2 btn : elements) {
+            selector = new UiSelector().resourceId(btn.getResourceName());
             button = device.findObject(selector);
             result.add(button);
         }
